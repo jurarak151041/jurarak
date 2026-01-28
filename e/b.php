@@ -10,66 +10,84 @@
 
 <style>
     body {
-        background: linear-gradient(135deg, #0d1b3f, #1e3c72);
+        background-color: #f1f7ff;
         font-family: 'Segoe UI', sans-serif;
+        color: #333;
+    }
+
+    .page-header {
+        background-color: #0d6efd;
+        color: white;
+        padding: 30px 20px;
+        border-radius: 12px 12px 0 0;
+        text-align: center;
+    }
+
+    .page-header span {
+        color: #ffc107;
+        font-weight: bold;
     }
 
     .card {
-        border-radius: 16px;
-        overflow: hidden;
         border: none;
-    }
-
-    .card-header {
-        background: linear-gradient(90deg, #003366, #0056b3);
-        color: #fff;
+        border-radius: 12px;
     }
 
     .section-title {
-        color: #003366;
-        border-left: 6px solid #ffc107;
-        padding-left: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #0d6efd;
+        border-bottom: 3px solid #ffc107;
+        display: inline-block;
+        padding-bottom: 5px;
         margin-bottom: 20px;
-        font-weight: bold;
     }
 
     label {
         font-weight: 600;
+        margin-bottom: 6px;
     }
 
     .form-control,
     .form-select {
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
-    .btn-success {
-        background: linear-gradient(90deg, #28a745, #5fd068);
+    .btn-submit {
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 25px;
+        padding: 10px 30px;
         border: none;
-        border-radius: 30px;
-        padding: 10px 25px;
     }
 
-    .btn-outline-danger {
-        border-radius: 30px;
-        padding: 10px 25px;
+    .btn-submit:hover {
+        background-color: #0b5ed7;
     }
 
-    .btn-info {
-        background: linear-gradient(90deg, #ffc107, #ffdd57);
+    .btn-reset {
+        border-radius: 25px;
+        padding: 10px 30px;
+    }
+
+    .btn-next {
+        background-color: #ffc107;
+        color: #000;
+        border-radius: 25px;
+        padding: 10px 30px;
         border: none;
-        border-radius: 30px;
-        padding: 10px 25px;
     }
 
-    .btn-info:hover {
-        background: #ffca2c;
+    .btn-next:hover {
+        background-color: #e0a800;
+        color: #000;
     }
 
     footer {
         text-align: center;
-        color: #fff;
         font-size: 0.9rem;
-        margin-top: 30px;
+        color: #666;
+        margin-top: 25px;
     }
 </style>
 </head>
@@ -77,34 +95,35 @@
 <body>
 
 <div class="container mt-5 mb-5">
-    <div class="card shadow-lg">
-        <div class="card-header text-center py-4">
-            <h1 class="h3 mb-1">💼 ใบสมัครงานออนไลน์</h1>
-            <p class="mb-0">บริษัท TECHNOVATE CO., LTD.</p>
+    <div class="card shadow-sm">
+
+        <div class="page-header">
+            <h1 class="h4 mb-1">ใบสมัครงานออนไลน์</h1>
+            <p class="mb-0">บริษัท <span>TECHNOVATE CO., LTD.</span></p>
         </div>
 
         <div class="card-body p-4">
 
             <form method="post">
 
-                <h4 class="section-title">1. ตำแหน่งที่ต้องการสมัคร</h4>
+                <h4 class="section-title">ตำแหน่งที่ต้องการสมัคร</h4>
                 <div class="mb-4">
-                    <label class="form-label">ตำแหน่งงาน <span class="text-danger">*</span></label>
+                    <label>ตำแหน่งงาน <span class="text-danger">*</span></label>
                     <select class="form-select" name="position" required>
                         <option value="" disabled selected>-- เลือกตำแหน่ง --</option>
-                        <option value="Software Developer">💻 Software Developer</option>
-                        <option value="Project Manager">📈 Project Manager</option>
-                        <option value="UX/UI Designer">🎨 UX/UI Designer</option>
-                        <option value="Digital Marketing Specialist">📢 Digital Marketing Specialist</option>
-                        <option value="Human Resources Officer">👥 Human Resources Officer</option>
+                        <option value="Software Developer">Software Developer</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="UX/UI Designer">UX/UI Designer</option>
+                        <option value="Digital Marketing Specialist">Digital Marketing Specialist</option>
+                        <option value="Human Resources Officer">Human Resources Officer</option>
                     </select>
                 </div>
 
-                <h4 class="section-title">2. ข้อมูลส่วนตัว</h4>
+                <h4 class="section-title">ข้อมูลส่วนตัว</h4>
 
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <label class="form-label">คำนำหน้า</label>
+                        <label>คำนำหน้า</label>
                         <select class="form-select" name="prefix" required>
                             <option value="นาย">นาย</option>
                             <option value="นาง">นาง</option>
@@ -113,20 +132,20 @@
                     </div>
 
                     <div class="col-md-9 mb-3">
-                        <label class="form-label">ชื่อ-สกุล</label>
+                        <label>ชื่อ-สกุล</label>
                         <input type="text" class="form-control" name="fullname" required>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">วันเดือนปีเกิด</label>
+                <div class="mb-4">
+                    <label>วันเดือนปีเกิด</label>
                     <input type="date" class="form-control" name="birthday" required>
                 </div>
 
-                <h4 class="section-title mt-4">3. การศึกษาและประสบการณ์</h4>
+                <h4 class="section-title">การศึกษาและประสบการณ์</h4>
 
                 <div class="mb-3">
-                    <label class="form-label">ระดับการศึกษาสูงสุด</label>
+                    <label>ระดับการศึกษาสูงสุด</label>
                     <select class="form-select" name="education" required>
                         <option value="" disabled selected>-- เลือกวุฒิ --</option>
                         <option value="มัธยมศึกษา">มัธยมศึกษา</option>
@@ -138,12 +157,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">ทักษะ / ความสามารถพิเศษ</label>
+                    <label>ทักษะ / ความสามารถพิเศษ</label>
                     <textarea class="form-control" name="skills" rows="3"></textarea>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label">ประสบการณ์ทำงาน</label>
+                    <label>ประสบการณ์ทำงาน</label>
                     <textarea class="form-control" name="experience" rows="4"></textarea>
                 </div>
 
@@ -158,15 +177,14 @@ if (isset($_POST['Submit'])) {
      '{$_POST['education']}','{$_POST['skills']}','{$_POST['experience']}')";
 
     mysqli_query($conn, $sql) or die("insert ไม่ได้");
-
     echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
 }
 ?>
 
                 <div class="text-center pt-4 border-top">
-                    <button type="submit" name="Submit" class="btn btn-success btn-lg me-2">✅ ยืนยันการสมัคร</button>
-                    <button type="reset" class="btn btn-outline-danger btn-lg me-2">❌ ล้างข้อมูล</button>
-                    <a href="next_page.html" class="btn btn-info btn-lg text-white">➡️ ขั้นตอนถัดไป</a>
+                    <button type="submit" name="Submit" class="btn btn-submit me-2">ยืนยันการสมัคร</button>
+                    <button type="reset" class="btn btn-outline-secondary btn-reset me-2">ล้างข้อมูล</button>
+                    <a href="next_page.html" class="btn btn-next">ขั้นตอนถัดไป</a>
                 </div>
 
             </form>
@@ -174,8 +192,8 @@ if (isset($_POST['Submit'])) {
         </div>
     </div>
 
-    <footer class="mt-4">
-        © 2026 TECHNOVATE CO., LTD. | All Rights Reserved
+    <footer>
+        © 2026 TECHNOVATE CO., LTD. All rights reserved.
     </footer>
 </div>
 
