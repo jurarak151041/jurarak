@@ -1,19 +1,20 @@
 <?php
-	include_once("checklogin.php");
+	include_once("checklogin.php"); // แก้ชื่อไฟล์ให้ถูกต้อง (ลบ _ ออก)
 ?>
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>หน้าหลักแอดมิน - จุฬาลักษณ์</title>
-</head>
+...
 <body>
-<h1>หน้าหลักแอดมิน - จุฬาลักษณ์</h1>
-<?php echo "แอดมิน" $_SESSION['a_name'];?><br>
+
+<h1>เข้าสู่ระบบหลังบ้าน - จุฬาลักษณ์</h1>
+
+<?php echo "แอดมิน: ". $_SESSION['aname']; ?> <br> 
+
 <ul>
-<a href="products.php"><li>จัดการสินค้า</li></a>
-<a href="orders.php"><li>จัดการออเดอร์</li></a>
-<a href="customers.php"><li>จัดการลูกค้า</li></a>
-<a href="logout.php"><li>ออกจากระบบ</li></a>
+    <li><a href="products.php">จัดการสินค้า</a></li>
+	<li><a href="orders.php">จัดการออเดอร์</a></li>
+	<li><a href="customers.php">จัดการลูกค้า</a></li>
+	<li><a href="logout.php">ออกจากระบบ</a></li>
 </ul>
 </body>
+</html>
