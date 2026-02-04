@@ -1,104 +1,106 @@
 <?php
 session_start();
+include_once("connectdb.php");
 
-// ตรวจสอบว่าถ้ายังไม่ได้ Login ให้เด้งกลับไปหน้า Login (เพื่อความปลอดภัย)
-if (!isset($_SESSION['aid'])) {
-    echo "<script>alert('กรุณาเข้าสู่ระบบก่อน'); window.location='login.php';</script>";
-    exit;
+if (isset($_POST['Submit'])) {
+    $user = $_POST['auser'];
+    $pwd = $_POST['apwd'];
+
+    // 1. ป้องกัน SQL Injection ด้วย Prepared Statement
+    $stmt = mysqli_prepare($conn, "SELECT a_id, a_name, a_password FROM admin WHERE a_username = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "s", $user);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($data = mysqli_fetch_assoc($result)) {
+        // 2. ตรวจสอบรหัสผ่านที่เข้ารหัส (รองรับทั้ง Hash และ Plain text เพื่อให้คุณเข้าใช้งานได้ก่อน)
+        if (password_verify($pwd, $data['a_password']) || $pwd === $data['a_password']) {
+            $_SESSION['aid'] = $data['a_id'];
+            $_SESSION['aname'] = $data['a_name'];
+            
+            echo "<script>window.location='index2.php';</script>";
+            exit;
+        }
+    }
+    $error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง!";
 }
 ?>
+
 <!doctype html>
 <html lang="th">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>จัดการระบบ - จุฬาลักษณ์</title>
+    <title>Login - จุฬาลักษณ์</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
     <style>
-        :root {
-            --bs-blue-dark: #003366; /* น้ำเงินเข้ม */
-            --bs-yellow-gold: #ffcc00; /* เหลืองทอง */
+        body {
+            background: linear-gradient(135deg, #002366 50%, #ffcc00 50%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body { background-color: #f4f4f4; }
-        .navbar { background-color: var(--bs-blue-dark); border-bottom: 4px solid var(--bs-yellow-gold); }
-        .nav-link, .navbar-brand { color: white !important; }
-        .card-menu {
-            transition: transform 0.2s;
+        .card {
             border: none;
-            border-top: 5px solid var(--bs-yellow-gold);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
         }
-        .card-menu:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .card-header {
+            background-color: #002366;
+            color: #ffcc00;
+            text-align: center;
+            padding: 2rem;
+            border: none;
         }
-        .icon-box {
-            font-size: 3rem;
-            color: var(--bs-blue-dark);
+        .btn-primary {
+            background-color: #002366;
+            border: none;
+            transition: 0.3s;
         }
-        .btn-logout { background-color: var(--bs-yellow-gold); color: #000; font-weight: bold; }
-        .btn-logout:hover { background-color: #e6b800; }
+        .btn-primary:hover {
+            background-color: #001a4d;
+            transform: translateY(-2px);
+        }
+        .form-control:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 0.25 hide rgba(255, 204, 0, 0.25);
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="#"><i class="bi bi-cpu-fill me-2"></i>ระบบจัดการหลังบ้าน</a>
-        <div class="d-flex align-items-center">
-            <span class="text-white me-3">
-                <i class="bi bi-person-circle me-1 text-warning"></i>
-                แอดมิน: <strong><?php echo htmlspecialchars($_SESSION['aname']); ?></strong>
-            </span>
-            <a href="logout.php" class="btn btn-logout btn-sm">ออกจากระบบ</a>
+<div class="container d-flex justify-content-center">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0 fw-bold">เข้าสู่ระบบ</h3>
+            <small>จัดการระบบโดย จุฬาลักษณ์</small>
         </div>
-    </div>
-</nav>
+        <div class="card-body p-4 bg-white">
+            <?php if(isset($error)): ?>
+                <div class="alert alert-danger py-2 text-center"><?php echo $error; ?></div>
+            <?php endif; ?>
 
-<div class="container my-5">
-    <div class="row mb-4 text-center">
-        <div class="col">
-            <h1 class="display-5 fw-bold" style="color: var(--bs-blue-dark);">Dashboard</h1>
-            <p class="lead">ยินดีต้อนรับสู่ระบบจัดการร้านค้าของ จุฬาลักษณ์</p>
-        </div>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-md-4">
-            <a href="products.php" class="text-decoration-none">
-                <div class="card card-menu h-100 text-center p-4">
-                    <div class="card-body">
-                        <div class="icon-box mb-3"><i class="bi bi-box-seam"></i></div>
-                        <h4 class="card-title text-dark">จัดการสินค้า</h4>
-                        <p class="card-text text-muted">เพิ่ม แก้ไข ลบ ข้อมูลสินค้าในคลัง</p>
-                    </div>
+            <form method="post" action="">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-dark">Username</label>
+                    <input type="text" name="auser" class="form-control form-control-lg" placeholder="กรอกชื่อผู้ใช้" autofocus required>
                 </div>
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <a href="orders.php" class="text-decoration-none">
-                <div class="card card-menu h-100 text-center p-4">
-                    <div class="card-body">
-                        <div class="icon-box mb-3"><i class="bi bi-cart-check"></i></div>
-                        <h4 class="card-title text-dark">จัดการออเดอร์</h4>
-                        <p class="card-text text-muted">ตรวจสอบและอัปเดตสถานะคำสั่งซื้อ</p>
-                    </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold text-dark">Password</label>
+                    <input type="password" name="apwd" class="form-control form-control-lg" placeholder="กรอกรหัสผ่าน" required>
                 </div>
-            </a>
-        </div>
-
-        <div class="col-md-4">
-            <a href="customers.php" class="text-decoration-none">
-                <div class="card card-menu h-100 text-center p-4">
-                    <div class="card-body">
-                        <div class="icon-box mb-3"><i class="bi bi-people"></i></div>
-                        <h4 class="card-title text-dark">จัดการลูกค้า</h4>
-                        <p class="card-text text-muted">ดูข้อมูลและประวัติการซื้อของสมาชิก</p>
-                    </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" name="Submit" class="btn btn-primary btn-lg fw-bold text-warning">LOGIN</button>
                 </div>
-            </a>
+            </form>
+        </div>
+        <div class="card-footer bg-light text-center py-3">
+            <small class="text-muted">© 2026 จุฬาลักษณ์ ลมดา (พลอย)</small>
         </div>
     </div>
 </div>
