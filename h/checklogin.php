@@ -1,10 +1,9 @@
 <?php
 	session_start();
-	
-	unset($_SESSION['aid']) ;
-	unset($_SESSION['aname']) ;
-	
-		echo"<script>" ;
-		echo "window.location='index.php';";
-		echo "</script>";
+	if(empty($_SESSION['aid'])) {
+		echo"Access Denied" ;
+		echo"<meta http-equiv='refresh' content='4; url=index.php'>";
+		exit;
+	}
 ?>
+
