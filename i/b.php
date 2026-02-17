@@ -63,7 +63,7 @@ $rs = mysqli_query($conn, $sql);
         <td><?php echo $data['p_name'] ;?></td>
         <td><?php echo $data['r_name'] ;?></td>
         <td><img src="images/<?php echo $data['p_id'] ; ?>.<?php echo $data['p_ext'] ; ?>" width="140"></td>
-        <td width="80" align="center"><a href="delete_provinces.php?id=<?php echo $data['p_id']; ?>&ext=<?php echo $data['p_ext'] ;?>" onClick="return confirm('ยืนยันการลบ');"><img src="images/Delete.jpg" width="40"></a></td>
+        <td width="80" align="center"><a href="delete_province.php?id=<?php echo $data['p_id']; ?>&ext=<?php echo $data['p_ext'] ;?>" onClick="return confirm('ยืนยันการลบ');"><img src="images/Delete.jpg" width="40"></a></td>
     </tr>
 <?php } ?>
 </table>
