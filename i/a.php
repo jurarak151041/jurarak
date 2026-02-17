@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title> จุฬาลักษณ์ ลมดา (พลอย)</title>
+<title>จุฬาลักษณ์ ลมดา (พลอย)</title>
 </head>
 
 <body>
@@ -38,8 +38,7 @@ $rs = mysqli_query($conn, $sql);
     <tr>
     	<td><?php echo $data['r_id'] ; ?></td>
         <td><?php echo $data['r_name'] ;?></td>
-        <td width="80" align="center"><a href="delete_region.php?id=<?php 
-        echo $data['r_id']; ?>" onClick="Return confirm();"><img src="images/Delete.jpg" width="20"></a></td>
+        <td width="80" align="center"><a href="delet_regions.php?id=<?php echo $data['r_id'] ; ?>" onClick="return confirm('ยืนยันการลบ?')"><img src="images/delete.jpg" width="20"></td>
     </tr>
 <?php } ?>
 </table>
