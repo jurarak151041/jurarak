@@ -62,8 +62,8 @@ $rs = mysqli_query($conn, $sql);
     <tr>
     	<td><?php echo $data['p_id'] ; ?></td>
         <td><?php echo $data['p_name'] ;?></td>
-        <td width="140" align="center"><img src="images/<?php echo $data['p_id'] ; ?>.<?php echo $data['p_ext'] ; ?>" width="50"></a></td>
-        <td width="140" align="center"><a href="delete_provinces.php?id=<?php echo $data['r_id']; ?>" onClick="return confirm('d1');"><img src="images/Delete.jpg" width="50"></a></td>
+        <td width="80" align="center"><img src="images/<?php echo $data['p_id'] ; ?>.<?php echo $data['p_ext'] ; ?>" width="140"></a></td>
+        <td width="80" align="center"><a href="delete_provinces.php?id=<?php echo $data['r_id']; ?>" onClick="return confirm('d1');"><img src="images/Delete.jpg" width="50"></a></td>
     </tr>
 <?php } ?>
 </table>
