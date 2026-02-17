@@ -11,16 +11,34 @@
 <form method="post" action="" enctype="multipart/form-data">
 	ชื่อจังหวัด <input type="text" name="pname" autofocus required>
     รูป <input type="file" name="pimag" required><br>
+
+    ภาค
+    <select name="rid">
+    <?php
+include_once("connectdb.php");
+$sql3 = "SELECT * FROM regions";
+$rs3 = mysqli_query($conn, $sql3);
+ while ($data3 = mysqli_fetch_array($rs3)){
+?>   
+        <option value="<?php echo $data3['r_id']; ?>">xxx</option>
+<?php}?>
+</select>
+<br>
+
     <button type="submit" name="Submit">บันทึก</button>
-    <button type="submit" name="Submit">บันทึก</button>	
 </form><br><br>
 
 <?php
 if(isset($_POST['Submit'])){
 	include_once("connectdb.php");
-	$rname = $_POST['rname'];
-	$sql2 = "INSERT INTO regions (r_id, r_name) VALUES (NULL, '{$rname}')";
+    $pname = $_POST['pname'];
+    $ext = pathinfo($_FILES['pimage']['name'], PATHINFO_EXTENSION);
+    $rid = $_POST['rid'];
+
+	$sql2 = "INSERT INTO `provinces` VALUES (NULL, '{$pname}','{$ext}','{$rname}')";
 	mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลไม่ได้");
+    $pid = mysql_insert_id($conn);
+    copy($_FILES['pimage']['tmp_name'],"imges/".$pid.".".);
 }
 ?>
 
