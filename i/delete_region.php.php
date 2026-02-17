@@ -3,7 +3,7 @@
 include_once("connectdb.php");
 
 $id=$_GET['id'];
-$sql="DELETE FORM regions WHERE r_id='{$id}' ";
+$sql="DELETE FORM regions WHERE regions r_id='{$id}' ";
 mysqli_query($conn,$sql) or die ("ลบข้อมูลไม่ได้");
 
 echo"<script>";
