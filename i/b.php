@@ -34,7 +34,7 @@ if(isset($_POST['Submit'])){
     $pname = $_POST['pname'];
     $ext = pathinfo($_FILES['pimage']['name'], PATHINFO_EXTENSION);
     $rid = $_POST['rid'];
-
+i
 	$sql2 = "INSERT INTO `provinces` VALUES (NULL, '{$pname}','{$ext}','{$rname}')";
 	mysqli_query($conn, $sql2) or die ("เพิ่มข้อมูลไม่ได้");
     $pid = mysql_insert_id($conn);
