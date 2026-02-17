@@ -38,7 +38,8 @@ $rs = mysqli_query($conn, $sql);
     <tr>
     	<td><?php echo $data['r_id'] ; ?></td>
         <td><?php echo $data['r_name'] ;?></td>
-        <td width="80" align="center"><img src="images/Delete.jpg" width="20"></td>
+        <td width="80" align="center"><a href="delete_region.php?id=<?php 
+        echo $data['r_id']; ?>" onClick="Return confirm();"><img src=images/Delete.jpg" width="20"></a></td>
     </tr>
 <?php } ?>
 </table>
