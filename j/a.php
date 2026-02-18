@@ -8,7 +8,7 @@
 <body>
 <h1>งาน j -- 66010914045 จุฬาลักษณ์ ลมดา (พลอย)</h1>
 
-<img src="1.jpg" width="400">
+<img src="img/1.jpg" width="400">
 
 </body>
 </html>
