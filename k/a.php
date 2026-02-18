@@ -36,7 +36,7 @@
 
 <body>
 
-    <h1>งาน k 66010914023 อนัญญา ผลจันทร์ (ตาล)</h1>
+    <h1>งาน k 66010914045 จุฬาลักษณ์ ลมดา (พลอย)</h1>
 
     <button class="btn-green" onclick="showImage('images/2.jpg')">คลิก</button>
     <button class="btn-orange" onclick="showImage('images/1.jpg')">คลิก</button>
