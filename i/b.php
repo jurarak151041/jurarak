@@ -23,11 +23,11 @@ if(isset($_POST['Submit'])){
 <html>
 <head>
 <meta charset="utf-8">
-<title>อภิมุข แสงดอกไม้</title>
+<title>จุฬาลักษณ์ ลมดา (พลอย)</title>
 </head>
 <body>
 
-<h1> งานi-- อภิมุข แสงดอกไม้(แฟร้งค์) </h1>
+<h1> งาน i -- จุฬาลักษณ์ ลมดา (พลอย) </h1>
 
 <form method="post" action="" enctype="multipart/form-data" >
     ชื่อจังหวัด <input type="text" name="pname" autofocus required><br>
