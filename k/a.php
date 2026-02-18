@@ -5,8 +5,8 @@
 <title>จุฬาลักษณ์ ลมดา (พลอย)</title>
 </head>
 
-<button class="btn-green" onclick="showImage('images/2.jpg')">Click</button>
-    <button class="btn-orange" onclick="showImage('images/1.jpg')">Click</button>
+<button class="btn-green" onclick="showImage('2.jpg')">Click</button>
+    <button class="btn-orange" onclick="showImage('1.jpg')">Click</button>
 
     <div id="myModal" class="modal">
         <span class="close" onclick="closeImage()">&times; ปิดรูปภาพ</span>
