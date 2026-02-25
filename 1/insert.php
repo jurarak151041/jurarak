@@ -1,16 +1,28 @@
 <?php
-include 'db.php';  // เรียกไฟล์เชื่อม database
+include 'db.php';  
+// เรียกไฟล์เชื่อมต่อฐานข้อมูล (ไฟล์นี้ต้องมี $conn)
 
-$p_name = $_POST['p_name'];     // รับค่าจากฟอร์ม
-$p_price = $_POST['p_price'];   // รับค่าจากฟอร์ม
+// ============================
+// รับค่าจากฟอร์ม (POST)
+// ============================
+$p_name  = $_POST['p_name'];   // ชื่อสินค้า
+$p_price = $_POST['p_price'];  // ราคาสินค้า
+$p_stock = $_POST['p_stock'];  // จำนวนสินค้า
 
-// คำสั่ง SQL เพิ่มข้อมูล
-$sql = "INSERT INTO products (p_name, p_price) 
-        VALUES ('$p_name', '$p_price')";
+// ============================
+// คำสั่ง SQL สำหรับเพิ่มข้อมูล
+// ============================
+$sql = "INSERT INTO products (p_name, p_price, p_stock, p_ext)
+        VALUES ('$p_name', '$p_price', '$p_stock', '')";
+// p_ext ใส่ค่าว่างไว้ก่อน (ยังไม่อัปโหลดรูป)
 
+// ============================
 // สั่งให้ database ทำงาน
-mysqli_query($conn, $sql);
+// ============================
+mysqli_query($conn, $sql) or die("SQL ERROR: ".mysqli_error($conn));
 
-// กลับไปหน้าแสดงสินค้า
+// ============================
+// กลับไปหน้า index
+// ============================
 header("location:index.php");
 ?>
