@@ -1,1 +1,34 @@
-php
+<?php
+$data = include 'select.php';
+?>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>เพิ่มข้อมูล</h2>
+<form action="insert.php" method="post">
+    <input name="name" placeholder="ชื่อ">
+    <input name="email" placeholder="อีเมล">
+    <button>บันทึก</button>
+</form>
+
+<hr>
+
+<h2>ข้อมูลในระบบ</h2>
+<table border="1">
+<tr><th>ID</th><th>Name</th><th>Email</th><th>Action</th></tr>
+
+<?php foreach($data as $row): ?>
+<tr>
+<td><?= $row['id'] ?></td>
+<td><?= $row['name'] ?></td>
+<td><?= $row['email'] ?></td>
+<td><a href="delete.php?id=<?= $row['id'] ?>">ลบ</a></td>
+</tr>
+<?php endforeach; ?>
+
+</table>
+
+</body>
+</html>
