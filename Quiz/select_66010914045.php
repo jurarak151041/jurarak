@@ -4,17 +4,9 @@ include_once("connectdb.php");      //คือการเรียกไฟล
 if(isset($_POST['Submit'])){        //เช็คว่า มีการกดปุ่มบันทึกหรือยัง
 
 //รับค่าจากฟอร์ม
-    $pname = $_POST['pname'];
-    $ext = pathinfo($_FILES['pimage']['name'], PATHINFO_EXTENSION);
-    $rid = $_POST['rid'];
-    
-    $sql_insert = "INSERT INTO provinces (p_id, p_name, p_ext, r_id) VALUES (NULL, '{$pname}', '{$ext}', '{$rid}')";        //บันทึกข้อมูลลงฐานข้อมูล //คือคำสั่ง SQL เพิ่มข้อมูลลงตาราง provinces
-    mysqli_query($conn, $sql_insert) or die ("เพิ่มข้อมูลไม่ได้: " . mysqli_error($conn));
-    
-    $pid = mysqli_insert_id($conn);     //ดึงรหัสจังหวัดที่เพิ่งเพิ่ม
-    
-    move_uploaded_file($_FILES['pimage']['tmp_name'], "images/".$pid.".".$ext);     //จะย้ายไฟล์ไปเก็บที่โฟลเดอร์ images/
-}
+    $cname = $_POST['cname'];
+    $cid = $_POST['cid'];
+   }
 ?>
 
 
@@ -26,20 +18,20 @@ if(isset($_POST['Submit'])){        //เช็คว่า มีการก�
 </head>
 
 <body>
-<h1>From</h1>
+<h1>ฟอร์มรับข้อมูล</h1>
 
-<form method="post" action="" enctype="multipart/form-data" >       <!--ส่วนที่ 3 : ฟอร์มกรอกข้อมูล-->
-    ชื่อจังหวัด <input type="text" name="pname" autofocus required><br>
-    รูปภาพ <input type="file" name="pimage" required> <br>
-    
-    ภาค
+<form medthod="post" action="">
+ชื่อภาพยนตร์ <input type="text" name="cname" autofocus required><br>
+ประเภทภาพยนตร์ <br><textarea name="ctype" cols="40" rows="4"></textarea><br>
+
+มาแรง!
     <select name="rid">     
     <?php
-    $sql_region = "SELECT * FROM regions";      //ดึงข้อมูลจากตาราง regions
-    $rs_region = mysqli_query($conn, $sql_region);
-    while ($data_region = mysqli_fetch_array($rs_region)){
+    $sql_cinima = "SELECT * FROM cinima";      //ดึงข้อมูลจากตาราง regions
+    $rs_cinima = mysqli_query($conn, $sql_cinima);
+    while ($data_cinima = mysqli_fetch_array($rs_region)){
     ?>   
-        <option value="<?php echo $data_region['r_id'] ; ?>"><?php echo $data_region['r_name'] ;?></option>     //แล้ววนลูปสร้าง option
+        <option value="<?php echo $data_cinima['c_id'] ; ?>"><?php echo $data_cinima['c_name'] ;?></option>     //แล้ววนลูปสร้าง option
     <?php } ?>
     </select>
     <br><br>
@@ -50,38 +42,10 @@ if(isset($_POST['Submit'])){        //เช็คว่า มีการก�
 
 <table border="1" cellpadding="5" cellspacing="0">
     <tr>
-        <th>รหัสจังหวัด</th>
-        <th>ชื่อจังหวัด</th>
-        <th>ชื่อภาค</th>
-        <th>รูป</th>
-        <th>ลบ</th>
+        <th>ชื่อภาพยนตร์</th>
+        <th>ประเภทภาพยนตร์</th>
+        <th>จำนวนที่นั่ง</th>
     </tr>
-<?php
-//ส่วนที่ 4 : แสดงข้อมูลทั้งหมดในตาราง
-$sql_show = "SELECT * FROM provinces AS p INNER JOIN regions AS r ON p.r_id = r.r_id ORDER BY p.p_id ASC";      //คือการ JOIN ตาราง provinces regions เพื่อดึงชื่อภาคมาแสดงด้วย
-$rs_show = mysqli_query($conn, $sql_show);
-
-while ($data = mysqli_fetch_array($rs_show)){       //วนลูปแสดงข้อมูล
-?>   
-    <tr>
-        <td align="center"><?php echo $data['p_id'] ; ?></td>
-        <td><?php echo $data['p_name'] ;?></td>
-        <td><?php echo $data['r_name'] ;?></td>
-        
-        <td align="center">
-            <?php if($data['p_ext'] != "") { ?>
-                <img src="images/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>" width="100">       <!--แสดงรูปภาพ-->
-            <?php } else { echo "ไม่มีรูป"; } ?>
-        </td>
-        
-        <td align="center">
-            <a href="delete_provinces.php?id=<?php echo $data['p_id']; ?>&ext=<?php echo $data['p_ext']; ?>" onClick="return confirm('ยืนยันการลบข้อมูลนี้?');">      <!--ส่วนที่ 5 : ปุ่มลบ ส่งค่าไปหน้า delete_provinces.php-->
-                <img src="images/Delete.jpg" width="30">
-
-                </a>
-        </td>
-    </tr>
-<?php } ?>
 </table>
 
 </body>
