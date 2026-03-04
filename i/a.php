@@ -28,7 +28,7 @@ if(isset($_POST['Submit'])){        //เช็คว่า มีการก�
 <body>
 <h1>งาน i -- จุฬาลักษณ์ ลมดา (พลอย)</h1>
 
-<form method="post" action="" enctype="multipart/form-data" >       //ส่วนที่ 3 : ฟอร์มกรอกข้อมูล
+<form method="post" action="" enctype="multipart/form-data" >       <!--ส่วนที่ 3 : ฟอร์มกรอกข้อมูล-->
     ชื่อจังหวัด <input type="text" name="pname" autofocus required><br>
     รูปภาพ <input type="file" name="pimage" required> <br>
     
@@ -70,12 +70,12 @@ while ($data = mysqli_fetch_array($rs_show)){       //วนลูปแสด�
         
         <td align="center">
             <?php if($data['p_ext'] != "") { ?>
-                <img src="images/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>" width="100">       //แสดงรูปภาพ
+                <img src="images/<?php echo $data['p_id']; ?>.<?php echo $data['p_ext']; ?>" width="100">       <!--แสดงรูปภาพ-->
             <?php } else { echo "ไม่มีรูป"; } ?>
         </td>
         
         <td align="center">
-            <a href="delete_provinces.php?id=<?php echo $data['p_id']; ?>&ext=<?php echo $data['p_ext']; ?>" onClick="return confirm('ยืนยันการลบข้อมูลนี้?');">      //ส่วนที่ 5 : ปุ่มลบ ส่งค่าไปหน้า delete_provinces.php
+            <a href="delete_provinces.php?id=<?php echo $data['p_id']; ?>&ext=<?php echo $data['p_ext']; ?>" onClick="return confirm('ยืนยันการลบข้อมูลนี้?');">      <!--ส่วนที่ 5 : ปุ่มลบ ส่งค่าไปหน้า delete_provinces.php-->
                 <img src="images/Delete.jpg" width="30">
 
                 </a>
@@ -86,4 +86,4 @@ while ($data = mysqli_fetch_array($rs_show)){       //วนลูปแสด�
 
 </body>
 </html>
-<?php mysqli_close($conn); ?>       //ปิดการเชื่อมต่อฐานข้อมูล
+<?php mysqli_close($conn); ?>       <!--ปิดการเชื่อมต่อฐานข้อมูล-->
